@@ -63,7 +63,7 @@ services:
     depends_on:
       - kafka
       - postgres
-      -
+
     # --- 4. Confluent Schema Registry ---
   schema-registry:
     image: confluentinc/cp-schema-registry:latest
