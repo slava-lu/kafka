@@ -38,7 +38,7 @@ services:
   postgres:
     # *** INDENTATION FIX: Moved to be a top-level service ***
     image: postgres:15
-    container_name: postgres
+    container_name: postgres-kafka
     environment:
       POSTGRES_DB: cdk_db
       POSTGRES_USER: cdk_user
