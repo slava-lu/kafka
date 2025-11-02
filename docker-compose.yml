@@ -6,37 +6,32 @@ services:
     image: apache/kafka:4.1.0
     container_name: kafka
     ports:
-      # External port: Internal port
       - "9092:9092"
     environment:
       # Mandatory KRaft configuration
       KAFKA_NODE_ID: "1"
       KAFKA_PROCESS_ROLES: "broker,controller"
       KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
-      
-      # *** NECESSARY FIX: Cluster ID is mandatory for apache/kafka KRaft image ***
-      # This is a fixed UUID for a single-node cluster
       CLUSTER_ID: "ABCDEFGHIJKLMNOPQRSTUV" 
       
       # Listener configuration
       KAFKA_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092" # Use service name 'kafka' for internal communication
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT"
       KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
       
-      # Optional minimal configs (left as is)
+      # Optional minimal configs
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "0"
-      KAFKA_LOG_DIRS: "/tmp/kraft-storage" # Ensures a proper log dir is set
+      KAFKA_LOG_DIRS: "/tmp/kraft-storage"
     volumes:
       - kafka_data:/var/lib/kafka/data
 
   # --- 2. PostgreSQL for Conduktor Console persistence ---
   postgres:
-    # *** INDENTATION FIX: Moved to be a top-level service ***
     image: postgres:15
     container_name: postgres-kafka
     environment:
@@ -48,7 +43,6 @@ services:
 
   # --- 3. Conduktor Console (Kafka UI) ---
   conduktor-console:
-    # *** INDENTATION FIX: Moved to be a top-level service ***
     image: conduktor/conduktor-console:latest
     container_name: conduktor-console
     ports:
@@ -56,7 +50,7 @@ services:
     environment:
       # Database Connection
       CDK_DATABASE_TYPE: postgres
-      CDK_DATABASE_HOST: postgres # Connects to the 'postgres' service
+      CDK_DATABASE_HOST: postgres
       CDK_DATABASE_USERNAME: cdk_user
       CDK_DATABASE_PASSWORD: cdk_password
       CDK_DATABASE_NAME: cdk_db
