@@ -46,7 +46,7 @@ services:
     image: conduktor/conduktor-console:latest
     container_name: conduktor-console
     ports:
-      - "8080:8080"
+      - "8090:8080"
     environment:
       # Database Connection
       CDK_DATABASE_TYPE: postgres
