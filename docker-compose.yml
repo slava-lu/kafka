@@ -57,6 +57,7 @@ services:
     depends_on:
       - kafka
       - postgres
+      - schema-registry
 
     # --- 4. Confluent Schema Registry ---
   schema-registry:
