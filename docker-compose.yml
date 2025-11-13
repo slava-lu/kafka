@@ -32,15 +32,27 @@ services:
       - myApp-kafka_data:/var/lib/kafka/data
 
   # --- 2. PostgreSQL for Conduktor Console persistence ---
-  postgres:
+  postgres-conductor:
     image: postgres:15
-    container_name: postgres-kafka
+    container_name: postgres-conductor
     environment:
       POSTGRES_DB: cdk_db
       POSTGRES_USER: cdk_user
       POSTGRES_PASSWORD: cdk_password
     volumes:
       - myApp-conductor-data:/var/lib/postgresql/data
+
+  postgres-business:
+    image: postgres:15
+    container_name: postgres-business
+    environment:
+      POSTGRES_DB: business_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - myApp-business-data:/var/lib/postgresql/data
 
   # --- 3. Conduktor Console (Kafka UI) http://localhost:8090 ---
   conduktor-console:
@@ -51,13 +63,13 @@ services:
     environment:
       # Database Connection
       CDK_DATABASE_TYPE: postgres
-      CDK_DATABASE_HOST: postgres
+      CDK_DATABASE_HOST: postgres-conductor
       CDK_DATABASE_USERNAME: cdk_user
       CDK_DATABASE_PASSWORD: cdk_password
       CDK_DATABASE_NAME: cdk_db
     depends_on:
       - kafka
-      - postgres
+      - postgres-conductor
       - schema-registry
 
     # --- 4. Confluent Schema Registry ---
@@ -77,3 +89,4 @@ services:
 volumes:
   myApp-kafka_data:
   myApp-conductor-data:
+  myApp-business-data:
