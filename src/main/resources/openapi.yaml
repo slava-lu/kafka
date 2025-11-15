@@ -8,7 +8,7 @@ paths:
   /echo:
     post:
       summary: Echo a string
-      operationId: echoString
+      operationId: sendString
       tags:
         - echo
       requestBody:
