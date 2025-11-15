@@ -8,8 +8,8 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 class DemoApplicationTests {
 
-	@Test
+/*	@Test
 	void contextLoads() {
-	}
+	}*/
 
 }

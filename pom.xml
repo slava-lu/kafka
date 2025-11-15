@@ -130,19 +130,23 @@
 							<apiPackage>${project.basePackage}.api</apiPackage>
 							<modelPackage>${project.basePackage}.model</modelPackage>
 							<invokerPackage>${project.basePackage}.invoker</invokerPackage>
-
+							<generateSupportingFiles>false</generateSupportingFiles>
 							<output>${project.build.directory}/generated-sources/openapi</output>
 
-							<interfaceOnly>true</interfaceOnly>
-							<library>spring-boot</library>
-
-							<generateApis>true</generateApis>
-							<generateModels>true</generateModels>
-							<generateSupportingFiles>false</generateSupportingFiles>
-
 							<configOptions>
+								<generateApis>true</generateApis>
+								<generateModels>true</generateModels>
+								<interfaceOnly>true</interfaceOnly>
+								<useBigDecimal>true</useBigDecimal>
+								<useBeanValidation>true</useBeanValidation>
+								<useSwaggerAnnotations>true</useSwaggerAnnotations>
+								<openApiNullable>true</openApiNullable>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<generateModelTests>false</generateModelTests>
+								<generateApiTests>false</generateApiTests>
+								<library>spring-boot</library>
 								<useLombok>true</useLombok>
-								<useJakartaEe>true</useJakartaEe>
+								<useSpringBoot3>true</useSpringBoot3>
 							</configOptions>
 						</configuration>
 					</execution>
