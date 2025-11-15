@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: Example Echo API
+  version: 1.0.0
+servers:
+  - url: /
+paths:
+  /echo:
+    post:
+      summary: Echo a string
+      operationId: echoString
+      tags:
+        - echo
+      requestBody:
+        description: A plain string to echo
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK - echoed string
+          content:
+            application/json:
+              schema:
+                type: string
