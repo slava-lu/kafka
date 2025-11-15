@@ -16,6 +16,7 @@ spring:
   flyway:
     enabled: true
     create-schemas: true
+    clean-disabled: false
     locations: classpath:db/migration
 
   kafka:
