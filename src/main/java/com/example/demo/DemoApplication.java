@@ -12,6 +12,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 @SpringBootApplication
 public class DemoApplication {
 
+	// Swagger UI http://localhost:8080/swagger-ui/index.html
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
