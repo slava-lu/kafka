@@ -17,11 +17,39 @@ paths:
         content:
           application/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/EchoRequest'
       responses:
         '200':
           description: OK - echoed string
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/EchoResponse'
+
+components:
+  schemas:
+    EchoRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the request.
+        message:
+          type: string
+          description: The string content to be echoed.
+      required:
+        - id
+        - message
+
+    EchoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier from the request.
+        message:
+          type: string
+          description: The echoed string content.
+      required:
+        - id
+        - message

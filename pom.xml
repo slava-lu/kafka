@@ -124,14 +124,14 @@
 							<apiPackage>${project.basePackage}.api</apiPackage>
 							<modelPackage>${project.basePackage}.model</modelPackage>
 							<invokerPackage>${project.basePackage}.invoker</invokerPackage>
-							<generateSupportingFiles>false</generateSupportingFiles>
+                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 							<output>${project.build.directory}/generated-sources/openapi</output>
 							<configOptions>
                                 <delegatePattern>true</delegatePattern>
 								<interfaceOnly>true</interfaceOnly>
 								<useBigDecimal>true</useBigDecimal>
 								<useSwaggerAnnotations>true</useSwaggerAnnotations>
-								<openApiNullable>true</openApiNullable>
+                                <openApiNullable>false</openApiNullable>
 								<hideGenerationTimestamp>true</hideGenerationTimestamp>
 								<useLombok>true</useLombok>
 								<useSpringBoot3>true</useSpringBoot3>
