@@ -121,27 +121,21 @@
 						<configuration>
 							<inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
 							<generatorName>spring</generatorName>
-
 							<apiPackage>${project.basePackage}.api</apiPackage>
 							<modelPackage>${project.basePackage}.model</modelPackage>
 							<invokerPackage>${project.basePackage}.invoker</invokerPackage>
 							<generateSupportingFiles>false</generateSupportingFiles>
 							<output>${project.build.directory}/generated-sources/openapi</output>
-
 							<configOptions>
-								<generateApis>true</generateApis>
-								<generateModels>true</generateModels>
+                                <delegatePattern>true</delegatePattern>
 								<interfaceOnly>true</interfaceOnly>
 								<useBigDecimal>true</useBigDecimal>
-								<useBeanValidation>true</useBeanValidation>
 								<useSwaggerAnnotations>true</useSwaggerAnnotations>
 								<openApiNullable>true</openApiNullable>
 								<hideGenerationTimestamp>true</hideGenerationTimestamp>
-								<generateModelTests>false</generateModelTests>
-								<generateApiTests>false</generateApiTests>
-								<library>spring-boot</library>
 								<useLombok>true</useLombok>
 								<useSpringBoot3>true</useSpringBoot3>
+                                <returnResponse>true</returnResponse>
 							</configOptions>
 						</configuration>
 					</execution>
