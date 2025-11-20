@@ -30,11 +30,4 @@ public class DemoApplication {
 	public void listen(String message) {
 		System.out.println(message);
 	}
-
-	@Bean
-	public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate) {
-		return args -> {
-			kafkaTemplate.send("topic3", "message 3").get();
-		};
-	}
 }
