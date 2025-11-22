@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EchoService {
 
-    public final KafkaTemplate<String, String> kafkaTemplate;
+    public final KafkaTemplate<String, EchoRequest> kafkaTemplate;
 
     public EchoResponse sendToKafka(EchoRequest body) {
-        kafkaTemplate.send("topicEcho", body.getMessage());
+        kafkaTemplate.send("topicEcho", body);
 
         EchoResponse response = new EchoResponse();
         response.setId(body.getId());

@@ -2,3 +2,28 @@ spring:
   application:
     name: demo
 
+  jpa:
+    hibernate:
+      ddl-auto: none        # flyway manages schema
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    create-schemas: true
+    clean-disabled: false
+    locations: classpath:db/migration
+
+  kafka:
+    consumer:
+      group-id: myGroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.example.model
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
