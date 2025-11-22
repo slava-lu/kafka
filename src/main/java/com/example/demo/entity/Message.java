@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.OffsetDateTime;
 
@@ -22,11 +23,7 @@ public class Message {
     @Column(name = "message", nullable = false)
     private String message;
 
+    @CreationTimestamp
     @Column(name = "received_at", nullable = false)
     private OffsetDateTime receivedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        receivedAt = OffsetDateTime.now();
-    }
 }
