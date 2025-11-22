@@ -33,6 +33,6 @@ public class DemoApplication {
 
     @KafkaListener(topics = "topicEcho")
 	public void listen(EchoRequest message) {
-    log.info("Received EchoRequest: " + message);
+    log.info("Received EchoRequest: " + message.getMessage());
 	}
 }
