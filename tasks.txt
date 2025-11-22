@@ -1,1 +1,2 @@
-How to make kafka send an Object EcoRequest
+check what producer returns in certificat
+ad Avro schema
