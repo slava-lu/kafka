@@ -1,2 +1,6 @@
 check what producer returns in certificat
 ad Avro schema
+why 'EchoResponse()' is deprecated
+add outbox pattern to Producer
+add Mapstruct
+add security with keycloak
