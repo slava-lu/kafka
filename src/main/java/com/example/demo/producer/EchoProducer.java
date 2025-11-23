@@ -18,11 +18,6 @@ public class EchoProducer {
 
     private final KafkaTemplate<String, EchoRequest> kafkaTemplate;
 
-    /**
-     * Publishes an echo request to the Kafka topic.
-     *
-     * @param request the echo request to publish
-     */
     public void publishEchoRequest(EchoRequest request) {
         log.debug("Publishing EchoRequest to topic {}: id={}, message={}",
                 KafkaTopicConfig.TOPIC_ECHO, request.getId(), request.getMessage());
