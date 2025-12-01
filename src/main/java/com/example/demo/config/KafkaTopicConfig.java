@@ -12,13 +12,22 @@ import org.springframework.kafka.config.TopicBuilder;
 @Configuration
 public class KafkaTopicConfig {
 
-    public static final String TOPIC_ECHO = "topic-echo";
+    public static final String TOPIC_1 = "topic-1";
+    public static final String TOPIC_2 = "topic-2";
 
     @Bean
-    public NewTopic echoTopic() {
-        return TopicBuilder.name(TOPIC_ECHO)
-                .partitions(10)
+    public NewTopic topic1() {
+        return TopicBuilder.name(TOPIC_1)
+                .partitions(2)
                 .replicas(1)
                 .build();
+    }
+
+    @Bean
+    public NewTopic topic2() {
+        return TopicBuilder.name(TOPIC_2)
+          .partitions(2)
+          .replicas(1)
+          .build();
     }
 }

@@ -20,9 +20,9 @@ public class EchoProducer {
 
     public void publishEchoRequest(EchoRequest request) {
         log.debug("Publishing EchoRequest to topic {}: id={}, message={}",
-                KafkaTopicConfig.TOPIC_ECHO, request.getId(), request.getMessage());
+                KafkaTopicConfig.TOPIC_1, request.getId(), request.getMessage());
 
-        kafkaTemplate.send(KafkaTopicConfig.TOPIC_ECHO, request.getId(), request)
+        kafkaTemplate.send(KafkaTopicConfig.TOPIC_1, request.getId(), request)
                 .whenComplete((result, ex) -> {
                     if (ex != null) {
                         log.error("Failed to publish EchoRequest: id={}", request.getId(), ex);

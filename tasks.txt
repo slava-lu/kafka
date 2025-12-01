@@ -1,4 +1,8 @@
 check what producer returns in certificat
+learn retries
+implement dead letter queue
+concurrency
+what are other advanced kafka topics
 ad Avro schema
 why 'EchoResponse()' is deprecated
 add outbox pattern to Producer

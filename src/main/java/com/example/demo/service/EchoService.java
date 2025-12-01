@@ -34,7 +34,7 @@ public class EchoService {
         log.debug("Processing consumed message: id={}", request.getId());
 
         Message message = new Message();
-        message.setTopic(KafkaTopicConfig.TOPIC_ECHO);
+        message.setTopic(KafkaTopicConfig.TOPIC_1);
         message.setMessage(request.getMessage());
 
         messageRepository.save(message);
