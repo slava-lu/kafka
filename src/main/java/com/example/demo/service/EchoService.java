@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.config.KafkaTopicConfig;
 import com.example.demo.entity.Message;
+import com.example.demo.kafka.NonRetryableBusinessException;
+import com.example.demo.kafka.RetryableProcessingException;
 import com.example.demo.producer.EchoProducer;
 import com.example.demo.repository.MessageRepository;
 import com.example.model.EchoRequest;
@@ -31,7 +33,21 @@ public class EchoService {
     }
 
     public void processConsumedMessage(EchoRequest request) {
-        log.debug("Processing consumed message: id={}", request.getId());
+        log.debug("Processing consumed message: id={}, text={}", request.getId(), request.getMessage());
+
+        String text = request.getMessage();
+
+        // 👉 1) Simulate a NON-recoverable (business) error
+        if ("BAD".equalsIgnoreCase(text)) {
+            log.warn("Simulating NON-retryable error for message id={}", request.getId());
+            throw new NonRetryableBusinessException("Invalid echo message content: " + text);
+        }
+
+        // 👉 2) Simulate a RECOVERABLE (transient) error
+        if ("RETRY".equalsIgnoreCase(text)) {
+            log.warn("Simulating RETRYABLE (transient) error for message id={}", request.getId());
+            throw new RetryableProcessingException("Simulated transient failure for testing");
+        }
 
         Message message = new Message();
         message.setTopic(KafkaTopicConfig.TOPIC_1);
