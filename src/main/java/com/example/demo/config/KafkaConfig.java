@@ -9,7 +9,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.DefaultErrorHandler;
-import org.springframework.util.backoff.FixedBackOff;
+import org.springframework.util.backoff.ExponentialBackOff;
 
 @Configuration
 public class KafkaConfig {
@@ -24,7 +24,8 @@ public class KafkaConfig {
 
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate);
 
-        FixedBackOff backOff = new FixedBackOff(2_000L, 3L);
+        ExponentialBackOff backOff = new ExponentialBackOff(1_000L, 2.0);
+        backOff.setMaxElapsedTime(10_000L);  // Max total wait ~10 seconds
 
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(recoverer, backOff);
 
