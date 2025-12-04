@@ -6,6 +6,7 @@ import com.example.model.EchoRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,10 @@ public class EchoConsumer {
     private final EchoService echoService;
 
     @KafkaListener(topics = KafkaTopicConfig.TOPIC_1, groupId = "${spring.kafka.consumer.group-id}")
-    public void consumeEchoRequest(EchoRequest request,
-                                   @Headers MessageHeaders headers) {
+    public void consumeEchoRequest(
+            EchoRequest request,
+            @Headers MessageHeaders headers
+            ) {
         log.info("Received EchoRequest: id={}, message='{}'", request.getId(), request.getMessage());
         log.info("Kafka Headers:");
         headers.forEach((key, value) ->

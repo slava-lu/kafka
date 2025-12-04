@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.util.backoff.ExponentialBackOff;
@@ -22,6 +23,8 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
 
+       // factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
+
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate);
 
         ExponentialBackOff backOff = new ExponentialBackOff(1_000L, 2.0);
@@ -30,7 +33,11 @@ public class KafkaConfig {
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(recoverer, backOff);
 
         errorHandler.addRetryableExceptions(RetryableProcessingException.class);
-        errorHandler.addNotRetryableExceptions(NonRetryableBusinessException.class);
+        errorHandler.addNotRetryableExceptions(
+                NonRetryableBusinessException.class,
+                org.springframework.messaging.converter.MessageConversionException.class,
+                org.springframework.kafka.support.serializer.DeserializationException.class
+        );
         factory.setCommonErrorHandler(errorHandler);
 
         factory.setConcurrency(1);
