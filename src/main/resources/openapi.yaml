@@ -30,6 +30,17 @@ paths:
       operationId: getMessages
       tags:
         - echo
+      parameters:
+        - name: topic
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: message
+          in: query
+          schema:
+            type: string
+          required: false
       responses:
         '200':
           description: OK - list of messages

@@ -57,11 +57,11 @@ public class EchoService {
         log.info("Saved message to database: topic={}, message={}", message.getTopic(), request.getMessage());
     }
 
-    public List<EchoResponse> getMessages() {
+    public List<EchoResponse> getMessages(String topic, String message) {
         List<Message> response = messageRepository.findAll();
-        return response.stream().map(message -> new EchoResponse(message.getId())
-          .message(message.getMessage())
-          .topic(message.getTopic())
+        return response.stream().map(item -> new EchoResponse(item.getId())
+          .message(item.getMessage())
+          .topic(item.getTopic())
         ).toList();
     }
 }
