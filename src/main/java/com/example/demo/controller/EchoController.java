@@ -18,8 +18,8 @@ public class EchoController implements EchoApi {
     public final EchoService echoService;
 
     @Override
-    public ResponseEntity<List<EchoResponse>> getMessages(String topic, String message) {
-        List<EchoResponse> response = echoService.getMessages(topic, message);
+    public ResponseEntity<List<EchoResponse>> getMessages(String topic, String text) {
+        List<EchoResponse> response = echoService.getMessages(topic, text);
         return ResponseEntity.ok(response);
 
     }

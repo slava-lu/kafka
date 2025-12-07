@@ -1,3 +1,4 @@
+add Pagination to get messages and compare with Certificate
 introduce Mapstruct
 change openAPI to interface only=false
 what are other advanced kafka topics
