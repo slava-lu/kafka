@@ -18,7 +18,7 @@ public class EchoConsumer {
 
     private final EchoService echoService;
 
-    @KafkaListener(topics = KafkaTopicConfig.TOPIC_1, groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(id = "echoRequestListener", topics = KafkaTopicConfig.TOPIC_1, groupId = "${spring.kafka.consumer.group-id}")
     public void consumeEchoRequest(
             EchoRequest request,
             @Headers MessageHeaders headers

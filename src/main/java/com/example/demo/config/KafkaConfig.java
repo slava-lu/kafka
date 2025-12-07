@@ -41,6 +41,7 @@ public class KafkaConfig {
         factory.setCommonErrorHandler(errorHandler);
 
         factory.setConcurrency(1);
+        factory.setAutoStartup(false);
 
         return factory;
     }

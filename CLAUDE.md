@@ -6,6 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Spring Boot 3.5.7 + Kafka microservice demonstrating producer-consumer patterns with PostgreSQL persistence. Java 21 required.
 
+## Development Guidelines
+Before writing any code, always propose a clear solution plan.
+The plan must include:
+- What approach you will take
+- Key steps or architecture
+- Possible alternatives (if relevant)
+- Only after approval, proceed with implementing the code.
+
 ## Build & Run Commands
 
 ```bash
