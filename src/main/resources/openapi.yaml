@@ -25,6 +25,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EchoResponse'
+    get:
+      summary: Get all messages from the table
+      operationId: getMessages
+      tags:
+        - echo
+      responses:
+        '200':
+          description: OK - list of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EchoResponse'
+
 
 components:
   schemas:
@@ -32,7 +47,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier for the request.
         message:
           type: string
@@ -43,13 +58,16 @@ components:
 
     EchoResponse:
       type: object
+      required:
+        - id
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier from the request.
         message:
           type: string
           description: The echoed string content.
-      required:
-        - id
-        - message
+        topic:
+          type: string
+          description: The echoed string content.
+

@@ -1,3 +1,5 @@
+introduce Mapstruct
+change openAPI to interface only=false
 what are other advanced kafka topics
 ad Avro schema
 why 'EchoResponse()' is deprecated

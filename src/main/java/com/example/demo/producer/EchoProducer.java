@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class EchoProducer {
 
-    private final KafkaTemplate<String, EchoRequest> kafkaTemplate;
+    private final KafkaTemplate<Integer, EchoRequest> kafkaTemplate;
 
     public void publishEchoRequest(EchoRequest request) {
         log.debug("Publishing EchoRequest to topic {}: id={}, message={}",

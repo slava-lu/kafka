@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -25,11 +27,8 @@ public class EchoService {
 
         echoProducer.publishEchoRequest(request);
 
-        EchoResponse response = new EchoResponse();
-        response.setId(request.getId());
-        response.setMessage(request.getMessage());
-
-        return response;
+        return new EchoResponse(request.getId())
+          .message(request.getMessage());
     }
 
     public void processConsumedMessage(EchoRequest request) {
@@ -56,5 +55,13 @@ public class EchoService {
         messageRepository.save(message);
 
         log.info("Saved message to database: topic={}, message={}", message.getTopic(), request.getMessage());
+    }
+
+    public List<EchoResponse> getMessages() {
+        List<Message> response = messageRepository.findAll();
+        return response.stream().map(message -> new EchoResponse(message.getId())
+          .message(message.getMessage())
+          .topic(message.getTopic())
+        ).toList();
     }
 }

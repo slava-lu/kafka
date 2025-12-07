@@ -129,7 +129,7 @@
 							<configOptions>
                                 <delegatePattern>true</delegatePattern>
 								<interfaceOnly>true</interfaceOnly>
-								<useBigDecimal>true</useBigDecimal>
+								<useBigDecimal>false</useBigDecimal>
 								<useSwaggerAnnotations>true</useSwaggerAnnotations>
                                 <openApiNullable>false</openApiNullable>
 								<hideGenerationTimestamp>true</hideGenerationTimestamp>
